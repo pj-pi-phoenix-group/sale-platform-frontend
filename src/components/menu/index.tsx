@@ -1,0 +1,88 @@
+
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
+
+import { Logo, Category, MenuItem, ContainerMenu, TitleCategory } from "./styled"
+import { MenuInstitutionIcon } from '../../assets/assets';
+
+
+
+export default function Menu() {
+    const [menu] = useState(loadMenu());
+    const [itemSelected, setItemSelected] = useState('');
+
+    function isSelected(item:any) {
+        return (itemSelected === item);
+    }
+
+    function select(item:string) {
+        setItemSelected(item);
+    }
+
+    function loadMenu() {
+        return [
+            {
+                category: 'Dashboard',
+                itens: [
+                    { to: '/', name: 'Produtos', icon: <MenuInstitutionIcon /> },
+                    { to: '/', name: 'Estoque', icon: <MenuInstitutionIcon /> },
+                    { to: '/', name: 'Usuários', icon: <MenuInstitutionIcon /> },
+                    { to: '/', name: 'Compartilhar', icon: <MenuInstitutionIcon /> },
+                ]
+            },
+            {
+                category: 'Preferências',
+                itens: [
+                    { to: '/', name: 'Configurações', icon: <MenuInstitutionIcon /> },
+                    { to: '/', name: 'Ajuda', icon: <MenuInstitutionIcon /> },
+                ]
+            },
+            {
+                category: 'Conta',
+                itens: [
+                    { to: '/admin/login', name: 'Sair', icon: <MenuInstitutionIcon /> }
+                ]
+            }
+        ]
+    }
+
+    return (
+        <ContainerMenu>
+            <Link to="/admin">
+                <Logo>
+                    PHOENIX
+                </Logo>
+            </Link>
+        
+            {menu.map(x => 
+                <div key={x.category}>
+                    <TitleCategory>
+                        {x.category}
+                    </TitleCategory>
+                    <Category>
+                        {x.itens.map(x => 
+                            x.name !== 'Sair' ? 
+                            ( 
+                                <Link to={x.to} key={x.name}>
+                                    <MenuItem onClick={() => select(x.name)} isSelected={isSelected(x.name)}>
+                                        {x.icon}
+                                        {x.name}
+                                    </MenuItem>
+                                </Link>
+                            )
+                            : 
+                            (
+                                <MenuItem isSelected={false} onClick={() => {alert()}}>
+                                    {x.icon}
+                                    {x.name}
+                                </MenuItem>
+                            ) 
+                    )}
+                    </Category>
+                </div>    
+            )}
+        </ContainerMenu>
+    )
+
+}
