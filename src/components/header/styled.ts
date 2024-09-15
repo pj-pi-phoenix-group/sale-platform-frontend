@@ -9,11 +9,10 @@ const Container = styled.div`
   width: 95%;
   min-height: 10vh;
   padding: 1em 1em;
-  border-bottom: solid 1.5px #6C757D;
 `
 const PtLeft = styled.div`
 width: 50%;
-font: 500 2em roboto;
+font: bold 26px Exo;
   :nth-child(2) {
     color: #B38755 ;
   }
@@ -25,7 +24,7 @@ const PtRight = styled.div`
   justify-content: space-around;
 
   & span {
-    border-right: 2px solid #6C757D;
+    border-right: 1.8px solid #6C757D;
     font-size: 1.2em;
     margin: 0 20px;
     height: 70px;
@@ -51,7 +50,7 @@ const Profile = styled.div`
     flex-direction: column;
     margin-left: 14px;
     .name {
-    font: 500 18px Roboto;
+    font: bold 18px Exo;
     line-height: 2px;
   }
 

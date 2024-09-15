@@ -25,10 +25,10 @@ export default function Menu() {
             {
                 category: 'Dashboard',
                 itens: [
-                    { to: '/', name: 'Produtos', icon: <MenuInstitutionIcon /> },
-                    { to: '/', name: 'Estoque', icon: <MenuInstitutionIcon /> },
-                    { to: '/', name: 'Usuários', icon: <MenuInstitutionIcon /> },
-                    { to: '/', name: 'Compartilhar', icon: <MenuInstitutionIcon /> },
+                    { to: '/product', name: 'Produtos', icon: <MenuInstitutionIcon /> },
+                    { to: '/stock', name: 'Estoque', icon: <MenuInstitutionIcon /> },
+                    { to: '/users', name: 'Usuários', icon: <MenuInstitutionIcon /> },
+                    { to: '/share', name: 'Compartilhar', icon: <MenuInstitutionIcon /> },
                 ]
             },
             {
