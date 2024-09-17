@@ -1,4 +1,3 @@
-import type { BaseHTMLAttributes, DetailedHTMLProps } from 'react';
 import styled from 'styled-components';
 
 
@@ -55,6 +54,8 @@ const MenuItem = styled.div<IMenuItem>`
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    transition: all 1s;
     
     font: 500 1em Roboto;
     height: 3.2em;
