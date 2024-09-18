@@ -33,7 +33,7 @@ const PtRight = styled.div`
 
 const Icon = styled.img`
   background-color: #B38755;
-  width: 50px;
+  width: 45px;
   padding: 10px;
   height: auto;
   border-radius: 50%;

@@ -55,7 +55,7 @@ const MenuItem = styled.div<IMenuItem>`
     flex-direction: row;
     align-items: center;
 
-    transition: all 1s;
+    transition: all 0.3s;
     
     font: 500 1em Roboto;
     height: 3.2em;

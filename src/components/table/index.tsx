@@ -1,8 +1,9 @@
+import type { ReactNode } from "react";
 import { TableAdmin, Thead, Tbody, Td, Roboto } from "./styled";
 
 interface ITable {
   columns: {title: string}[];
-  rows: Array<{
+  rows?: Array<{
     title: string
     config: {
       width?: string;
@@ -11,10 +12,10 @@ interface ITable {
     onClick: () => void;
     value: string;
   }[]>;
-  size: number;
-  length: number;
+  size: string;
+  length: string;
   autoGenerate?: boolean;
-  children?: JSX.Element;
+  children?: ReactNode;
 }
 export default function Table(props:ITable) {
   
@@ -36,7 +37,7 @@ export default function Table(props:ITable) {
       <Tbody>
         {!props.autoGenerate && props.children}
 
-        {props.autoGenerate == true && 
+        {props.autoGenerate == true && props.rows &&
           props.rows.map((row, idxRow) => 
             <tr key={idxRow}>
               {row.map((cell, ic) => 
