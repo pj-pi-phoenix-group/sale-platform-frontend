@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { RoundedDeleteIcon, RoundedEditIcon } from "../../assets/assets";
 import Table from "../../components/table";
 import { Td, Tr } from "../../components/table/styled";
@@ -5,6 +6,7 @@ import TitleAdmin from "../../components/title";
 import { AdminContentBox, Text } from "./styled";
 
 export default function Product() {
+  const [dataResponse, setDataResponse] = useState<any>()
   const data = [
     {
       title: "ID",
@@ -75,6 +77,10 @@ export default function Product() {
       Ativo: true,
     },
   ];
+
+  useEffect(() =>{
+    setTimeout(() => setDataResponse(cosmeticsData), 2000 )
+  }, []);
   return (
     <AdminContentBox>
       <TitleAdmin> Produtos </TitleAdmin>
@@ -84,7 +90,7 @@ export default function Product() {
           size="100%"
           columns={data.map((item) => ({ title: item.title }))}
         >
-          {cosmeticsData.map((item) => (
+          {dataResponse && dataResponse.map((item:any) => (
             <Tr>
               <Td>
                 <Text> {item.Id} </Text>
@@ -117,6 +123,7 @@ export default function Product() {
               </Td>
             </Tr>
           ))}
+          {!dataResponse && <h1> carregando</h1>}
         </Table>
       </div>
     </AdminContentBox>

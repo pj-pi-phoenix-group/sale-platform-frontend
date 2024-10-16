@@ -1,6 +1,6 @@
 
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 
 import { Logo, Category, MenuItem, ContainerMenu, TitleCategory } from "./styled"
@@ -10,6 +10,7 @@ import { MenuInstitutionIcon } from '../../assets/assets';
 
 export default function Menu() {
     const [menu] = useState(loadMenu());
+    const navigate = useNavigate();
     const [itemSelected, setItemSelected] = useState('');
 
     function isSelected(item:any) {
@@ -46,6 +47,11 @@ export default function Menu() {
             }
         ]
     }
+
+    useEffect(() => {
+        select(loadMenu()[0].itens[0].name)
+        navigate('/login')
+    }, [])
 
     return (
         <ContainerMenu>
