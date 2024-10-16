@@ -55,7 +55,7 @@ const MenuItem = styled.div<IMenuItem>`
     flex-direction: row;
     align-items: center;
 
-    transition: all 1s;
+    transition: all 0.3s;
     
     font: 500 1em Roboto;
     height: 3.2em;
@@ -64,7 +64,7 @@ const MenuItem = styled.div<IMenuItem>`
     background-color: ${props => props.isSelected === true ? '#B38755' : '#2B3031' };
     color: ${props => props.isSelected === true ? '#fff' : '#fff' };
     border-radius: 16px;
-    margin: 10px;
+    margin: 10px 28px;
 
     & :nth-child(1) {
         margin-left: 3em;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Thead = styled.thead<{length: number}>`
+const Thead = styled.thead<{length: string}>`
   th {
         padding-left: 10px;
         text-align: left;
@@ -37,7 +37,7 @@ const Tr = styled.tr`
     
 `
 
-const TableAdmin = styled.table<{ size: number }>`
+const TableAdmin = styled.table<{ size: string }>`
   width: ${(props) => props.size};
 
   border-left: 1px solid #e2e2e2;
@@ -57,7 +57,7 @@ const TableAdmin = styled.table<{ size: number }>`
 `;
 
 export interface ITd {
-  config: {
+  config?: {
     width?: string;
     visibility?: 'visible' | 'hidden';
   };
