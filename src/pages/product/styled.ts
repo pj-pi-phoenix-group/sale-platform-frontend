@@ -22,7 +22,18 @@ text-align: left;
 margin-right: 10px;
 `
 
+const Label = styled.div`
+   display:flex;
+   flex-direction:column;
+   justify-content:space-evenly;
+   font: 1em Roboto;
+   width: 150px;
+   text-align: right;
+   margin-right: 10px;
+`
 
 
 
-export {AdminContentBox, Text}
+
+
+export {AdminContentBox, Text, Label}

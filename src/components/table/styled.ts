@@ -18,6 +18,7 @@ const Thead = styled.thead<{length: string}>`
 `
 
 const Tbody = styled.tbody`
+
     tr:hover {
         td * {
             visibility: visible;
@@ -39,6 +40,7 @@ const Tr = styled.tr`
 
 const TableAdmin = styled.table<{ size: string }>`
   width: ${(props) => props.size};
+  margin-bottom: 2em;
 
   border-left: 1px solid #e2e2e2;
   border-right: 1px solid #e2e2e2;

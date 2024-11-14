@@ -27,22 +27,8 @@ export default function Menu() {
                 category: 'Dashboard',
                 itens: [
                     { to: '/product', name: 'Produtos', icon: <MenuInstitutionIcon /> },
-                    { to: '/stock', name: 'Estoque', icon: <MenuInstitutionIcon /> },
-                    { to: '/users', name: 'Usuários', icon: <MenuInstitutionIcon /> },
+                    { to: '/users', name: 'Clientes', icon: <MenuInstitutionIcon /> },
                     { to: '/share', name: 'Compartilhar', icon: <MenuInstitutionIcon /> },
-                ]
-            },
-            {
-                category: 'Preferências',
-                itens: [
-                    { to: '/', name: 'Configurações', icon: <MenuInstitutionIcon /> },
-                    { to: '/', name: 'Ajuda', icon: <MenuInstitutionIcon /> },
-                ]
-            },
-            {
-                category: 'Conta',
-                itens: [
-                    { to: '/admin/login', name: 'Sair', icon: <MenuInstitutionIcon /> }
                 ]
             }
         ]
@@ -50,7 +36,7 @@ export default function Menu() {
 
     useEffect(() => {
         select(loadMenu()[0].itens[0].name)
-        navigate('/login')
+        
     }, [])
 
     return (

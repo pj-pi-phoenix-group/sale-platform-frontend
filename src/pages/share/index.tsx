@@ -1,5 +1,5 @@
 export default function Share() {
   return (
-    <h1> Share</h1>
+    <h1> Em desenvolvimento </h1>
   )
 }

@@ -19,3 +19,15 @@ a, a:visited, a:link {
   text-decoration: none;
   color: inherit;
 }
+.reload-icon {
+  display: inline-block;
+  transition: transform 0.4s;
+}
+
+.reload-icon:hover {
+  transform: rotate(360deg);
+}
+
+.reload-icon:active {
+  transform: rotate(720deg);
+}

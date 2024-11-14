@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { RoundedDeleteIcon, RoundedEditIcon } from "../../assets/assets";
 import Table from "../../components/table";
 import { Td, Tr } from "../../components/table/styled";
 import TitleAdmin from "../../components/title";
 import { AdminContentBox, Text } from "./styled";
+import Loaders from "../../components/loaders";
 
-export default function Product() {
-  const [dataResponse, setDataResponse] = useState<any>()
+export default function vProduct() {
+  const [dataResponse, setDataResponse] = useState<any[]>([]);
+ 
   const data = [
     {
       title: "ID",
@@ -37,93 +40,88 @@ export default function Product() {
       title: "",
       onClick: () => console.log("void"),
     },
-    {
-      title: "",
-      onClick: () => console.log("void"),
-    },
   ];
 
-  const cosmeticsData = [
-    {
-      Id: 11,
-      Descrição: "Máscara Facial Hidratante com Ácido Hialurônico",
-      Marca: "Natureza Pura",
-      Preço: "$24.99",
-      Categoria: "Cuidado com a Pele",
-      Ativo: true,
-    },
-    {
-      Id: 12,
-      Descrição: "Perfume Floral Amadeirado",
-      Marca: "Aroma Elegance",
-      Preço: "$39.99",
-      Categoria: "Perfumes",
-      Ativo: true,
-    },
-    {
-      Id: 13,
-      Descrição: "Sombra em Pó Compacta",
-      Marca: "Color Glam",
-      Preço: "$14.99",
-      Categoria: "Maquiagem para Olhos",
-      Ativo: true,
-    },
-    {
-      Id: 14,
-      Descrição: "Base Líquida Matte",
-      Marca: "Cobertura Perfeita",
-      Preço: "$29.99",
-      Categoria: "Maquiagem",
-      Ativo: true,
-    },
-  ];
-
-  useEffect(() =>{
-    setTimeout(() => setDataResponse(cosmeticsData), 2000 )
+  useEffect(() => {
+    axios.get("http://localhost:8080/v1/product")
+      .then((response: any) => {
+        setDataResponse(response.data);
+        console.log(response.data);
+      })
+      .catch((error: any) => console.error("Error fetching data:", error));
   }, []);
+
+  const handleDelete = (id: number, description: string) => {
+    if (window.confirm(`Tem certeza que deseja deletar o produto: ${description}?`)) {
+      axios.delete(`http://localhost:8080/v1/product/${id}`)
+        .then(() => {
+          setDataResponse(dataResponse.filter(item => item.productId !== id));
+          alert("Produto deletado com sucesso!");
+        })
+        .catch((error: any) => console.error("Error deleting product:", error));
+    }
+  };
+
+  const handleUpdateList = () => {
+    axios.get("http://localhost:8080/v1/product")
+      .then((response: any) => {
+        setDataResponse(response.data);
+        console.log(response.data);
+      })
+      .catch((error: any) => console.error("Error fetching data:", error));
+  };
+
   return (
     <AdminContentBox>
-      <TitleAdmin> Produtos </TitleAdmin>
+
+      <div className="box-title" style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+        <TitleAdmin> Produtos <span style={{ fontStyle: "normal" }}> - Gerenciar produtos </span></TitleAdmin>
+        <div className="reload">
+          <img
+          className="reload-icon"
+            onClick={() => handleUpdateList()}
+            src="/src/assets/reload.svg" style={{ width: "30px" }} alt="reload" />
+        </div>
+      </div>
+
       <div className="table-container">
         <Table
           length="3em"
           size="100%"
           columns={data.map((item) => ({ title: item.title }))}
         >
-          {dataResponse && dataResponse.map((item:any) => (
-            <Tr>
-              <Td>
-                <Text> {item.Id} </Text>
-              </Td>
-              <Td>
-                <Text> {item.Descrição} </Text>
-              </Td>
-              <Td>
-                <Text> {item.Marca} </Text>
-              </Td>
-              <Td>
-                <Text> {item.Preço} </Text>
-              </Td>
-              <Td>
-                <Text> {item.Categoria} </Text>
-              </Td>
-              <Td>
-                <input type="checkbox" checked={item.Ativo} disabled={true} />
-              </Td>
-              <Td config={{ visibility: "hidden", width: "1em" }}>
-                <RoundedEditIcon
-                  onClick={() => alert("Edit: " + item.Descrição)}
-                />
-              </Td>
+          {dataResponse.length > 0 ? (
+            dataResponse.map((item: any) => (
+              <Tr key={item.productId}>
+                <Td>
+                  <Text> {item.productId} </Text>
+                </Td>
+                <Td>
+                  <Text> {item.description} </Text>
+                </Td>
+                <Td>
+                  <Text> {item.brand} </Text>
+                </Td>
+                <Td>
+                  <Text> {item.price} </Text>
+                </Td>
+                <Td>
+                  <Text> {item.category} </Text>
+                </Td>
 
-              <Td config={{ visibility: "hidden", width: "1em" }}>
-                <RoundedDeleteIcon
-                  onClick={() => alert("Deletar: " + item.Descrição)}
-                />
-              </Td>
-            </Tr>
-          ))}
-          {!dataResponse && <h1> carregando</h1>}
+                <Td>
+                  <input type="checkbox" checked={item.status == "ACTIVE"} disabled={true} />
+                </Td>
+                <Td config={{ visibility: "hidden", width: "1em" }}>
+                  <RoundedDeleteIcon
+                    onClick={() => handleDelete(item.productId, item.description)}
+                  />
+                </Td>
+              </Tr>
+            ))
+          ) : (
+            <Loaders />
+          )}
         </Table>
       </div>
     </AdminContentBox>
